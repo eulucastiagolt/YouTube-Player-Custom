@@ -1,7 +1,7 @@
 # Framework para a api do YouTube.
 Crie player personalizado para os videos do YouTube
 
-**Alto implementado**
+**Auto implementado**
 
 Moment.js [Ver](https://momentjs.com)
 
