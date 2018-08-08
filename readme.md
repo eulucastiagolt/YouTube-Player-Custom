@@ -1,5 +1,6 @@
 # Framework para a api do YouTube.
 Crie player personalizado para os videos do YouTube
+Player responsivo, se adapita a qualquer local ou dispositivo.
 
 **Auto implementado**
 
@@ -26,7 +27,7 @@ Open Iconic [Ver](https://useiconic.com)
 </html>
 ```
 
-2. Fassa a chamada do player usando a ID definida na div e o ID do video do youtube
+2. Faça a chamada do player usando a ID definida na div e o ID do video do youtube
 
 ```javascript
 var player1 = new carregarvideo('localplayer', 's1D9Jo06XCg');
