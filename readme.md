@@ -1,5 +1,6 @@
 # Framework para a api do YouTube.
-Crie player personalizado para os videos do YouTube
+Crie player personalizado para os videos do YouTube.
+
 Player responsivo, se adapita a qualquer local ou dispositivo.
 
 **Auto implementado**
