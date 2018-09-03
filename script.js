@@ -9,13 +9,13 @@ addicon.type = "text/css";
 addicon.href = "//cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic.min.css";
 document.head.appendChild(addicon);
 
-let barradeprogress = document.createElement('style');
-barradeprogress.rel = "stylesheet";
-barradeprogress.type = "text/css";
-barradeprogress.innerText += "#progresso::-moz-progress-bar { background: #ff6600; }";
-barradeprogress.innerText += "#progresso::-webkit-progress-bar { background: #111; }";
-barradeprogress.innerText += "#progresso::-webkit-progress-value { background: #ff6600; }";
-document.head.appendChild(barradeprogress);
+// let barradeprogress = document.createElement('style');
+// barradeprogress.rel = "stylesheet";
+// barradeprogress.type = "text/css";
+// barradeprogress.innerText += "#progresso::-moz-progress-bar { background: #ff6600; }";
+// barradeprogress.innerText += "#progresso::-webkit-progress-bar { background: #111; }";
+// barradeprogress.innerText += "#progresso::-webkit-progress-value { background: #ff6600; }";
+// document.head.appendChild(barradeprogress);
 
 let pp,
 	sp = "0",
@@ -80,20 +80,23 @@ function carregarvideo(deonde, codevideo) {
 	pcstyle += "top:0; left:0;";
 	pcstyle += "z-index:5;";
 	playercontrole.style = pcstyle;
+
 	let btnplay_pause = document.createElement("div"), btnpstyle,
-		progressbar = document.createElement("progress"), pbstyle;
-	progressbar.max = "0";
-	progressbar.value = "0";
-	pbstyle = "width: 100%; height: 10px; position: absolute; bottom: 0; left: 0;";
-	pbstyle += "display: block;";
-	pbstyle += "border-radius: 0px;";
-	pbstyle += "border: none;";
-	pbstyle += "overflow: hidden;";
-	pbstyle += "background: #111;";
-	progressbar.style = pbstyle;
-	progressbar.id = "progresso";
-	playercontrole.appendChild(progressbar);
+		barra = document.createElement("div"), bstyle,
+		progresso = document.createElement("div"), pstyle;
+	bstyle = "width: 100%; height: 10px; background:#333; position: absolute; bottom:0;";
+	barra.style = bstyle;
+	barra.id = "barra";
+
+	pstyle = "width: 0px; height: 10px; background:#f60; position: absolute; left: 0; right: 0;";
+
+	progresso.style = pstyle;
+	progresso.id = "barra_interno";
+
+	playercontrole.appendChild(barra);
+	barra.appendChild(progresso);
 	playercontrole.appendChild(btnplay_pause);
+
 
 	btnpstyle = "width:90px; height:55px; background: #f60; border-radius:50px;";
 	btnpstyle += "transform:translate(-50%, -50%); position: relative; left:50%; top: 50%;";
@@ -179,11 +182,12 @@ function formataTempo(v){
 		//$('#tempototal').text(total.format('mm:ss'));
 	}
 	let max = v.getDuration(), value = v.getCurrentTime()
-	v.a.parentElement.lastChild.querySelector("progress").setAttribute("max", v.getDuration());
-	v.a.parentElement.lastChild.querySelector("progress").setAttribute("value", v.getCurrentTime());
+	//v.a.parentElement.lastChild.querySelector("progress").setAttribute("max", v.getDuration());
+	//v.a.parentElement.lastChild.querySelector("progress").setAttribute("value", v.getCurrentTime());
 	tt.innerText = v.getDuration();
 	document.getElementById("barra_interno").style.width = Math.round(coor)+"px";
-	console.log(coor);
+	//console.log(coor);
+	//console.log(v.a.parentElement.lastChild);
 }
 
 function myFunction(e) {
