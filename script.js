@@ -78,6 +78,7 @@ function carregarvideo(deonde, codevideo) {
 	bstyle = "width: 100%; height: 10px; background:#333; position: absolute; bottom:0;";
 	barra.style = bstyle;
 	barra.id = "barra";
+	barra.setAttribute("onclick", "myFunction(event)");
 
 	pstyle = "width: 0px; height: 10px; background:#f60; position: absolute; left: 0; right: 0;";
 
@@ -183,10 +184,9 @@ function myFunction(e) {
 	let w = document.getElementById("barra").offsetWidth;
     let x = (dura * (e.offsetX + 1)) / w;
     let coor = x;
-    // document.getElementById("barra_interno").style.width = parseInt(coor)+"px";
-    // document.getElementById("alertmouse").innerHTML = "width: " + 
-    // w + "px; max:" + dura + " time: " + coor + "Cursor: " + x;
-    //console.log(parseInt(x));
+    document.getElementById("barra_interno").style.width = parseInt(coor)+"px";
+    w + "px; max:" + dura + " time: " + coor + "Cursor: " + x;
+    console.log(parseInt(x));
     console.log(coor);
     videos[0].seekTo(coor);
     duracao(videos[0]);
