@@ -14,17 +14,13 @@ let pp,
 	video,
 	idv = 0,
 	videos = [],
-	ocont = "";
-
-let tt;
+	ocont = "",
+	timeUpdate;
 
 let x = document.createEvent("MouseEvent");
 x.initMouseEvent("click");
 
 function carregarvideo(deonde, codevideo) {
-	tt = document.createElement("div")
-	tt.id = "timeteste";
-	document.getElementById(deonde).appendChild(tt);
 
 	let localvideo = document.createElement('div');
 	localvideo.id = "videoaqui" + idv;
@@ -85,7 +81,6 @@ function carregarvideo(deonde, codevideo) {
 		for(let i in videos){
 			if(videos[i].g == iddv){
 				myFunction(e, videos[i]);
-				console.log(videos[i]);
 			}
 		}
 	}
@@ -163,9 +158,12 @@ function duracao(v){
 			//verePlaylist(v.getCurrentTime(), v.getDuration());
 		
 			if (v.getDuration() == v.getCurrentTime()) {
-				v.a.parentElement.lastChild.lastChild.style.display = "block";
-				v.a.parentElement.lastChild.lastChild.dispatchEvent(x);
-				v.stopVideo();
+				
+				if(v.getPlayerState() == 0){
+					v.a.parentElement.lastChild.lastChild.style.display = "block";
+					v.a.parentElement.lastChild.lastChild.dispatchEvent(x);
+					v.stopVideo();
+				};
 			}
 		}
 
@@ -184,9 +182,6 @@ function formataTempo(v){
 		let total = moment.utc(v.getDuration() * 1000);
 		//$('#tempototal').text(total.format('mm:ss'));
 	}
-	let max = v.getDuration(), value = v.getCurrentTime()
-
-	tt.innerText = v.getDuration();
 	v.a.parentElement.lastChild.querySelector("#barra_interno").style.width = Math.round(coor)+"px";
 }
 
@@ -196,9 +191,12 @@ function myFunction(e, v) {
     let x = (dura * (e.offsetX + 1)) / w;
     let coor = x;
     v.a.parentElement.lastChild.querySelector("#barra").querySelector("#barra_interno").style.width = parseInt(coor)+"px";
-    w + "px; max:" + dura + " time: " + coor + "Cursor: " + x;
-    //console.log(parseInt(x));
-    //console.log(coor);
     v.seekTo(coor);
-    duracao(v);
+	duracao(v);
+	console.log(v.getPlayerState());
+	if((v.getPlayerState() == -1) || (v.getPlayerState() == 5)){
+		v.a.parentElement.lastChild.lastChild.innerHTML = '<span class="oi" data-glyph="media-pause"></span>';
+		v.a.parentElement.lastChild.lastChild.querySelector("span").style = "display: inline-block; transform: translate(-50%, -50%); position: absolute; top: 50%; left: 50%;";
+		v.a.parentElement.lastChild.lastChild.setAttribute("vdStatus", '1');
+	}
 }
