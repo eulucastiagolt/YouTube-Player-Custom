@@ -9,14 +9,6 @@ addicon.type = "text/css";
 addicon.href = "//cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic.min.css";
 document.head.appendChild(addicon);
 
-// let barradeprogress = document.createElement('style');
-// barradeprogress.rel = "stylesheet";
-// barradeprogress.type = "text/css";
-// barradeprogress.innerText += "#progresso::-moz-progress-bar { background: #ff6600; }";
-// barradeprogress.innerText += "#progresso::-webkit-progress-bar { background: #111; }";
-// barradeprogress.innerText += "#progresso::-webkit-progress-value { background: #ff6600; }";
-// document.head.appendChild(barradeprogress);
-
 let pp,
 	sp = "0",
 	video,
@@ -64,7 +56,6 @@ function carregarvideo(deonde, codevideo) {
 		});
 	}
 	videos.push(video);
-	//console.log(video);
 	idv++;
 
 	let playermodall = "display: inline-block;";
@@ -87,6 +78,7 @@ function carregarvideo(deonde, codevideo) {
 	bstyle = "width: 100%; height: 10px; background:#333; position: absolute; bottom:0;";
 	barra.style = bstyle;
 	barra.id = "barra";
+	barra.setAttribute("onclick", "myFunction(event)");
 
 	pstyle = "width: 0px; height: 10px; background:#f60; position: absolute; left: 0; right: 0;";
 
@@ -182,12 +174,9 @@ function formataTempo(v){
 		//$('#tempototal').text(total.format('mm:ss'));
 	}
 	let max = v.getDuration(), value = v.getCurrentTime()
-	//v.a.parentElement.lastChild.querySelector("progress").setAttribute("max", v.getDuration());
-	//v.a.parentElement.lastChild.querySelector("progress").setAttribute("value", v.getCurrentTime());
+
 	tt.innerText = v.getDuration();
-	document.getElementById("barra_interno").style.width = Math.round(coor)+"px";
-	//console.log(coor);
-	//console.log(v.a.parentElement.lastChild);
+	v.a.parentElement.lastChild.querySelector("#barra_interno").style.width = Math.round(coor)+"px";
 }
 
 function myFunction(e) {
@@ -195,10 +184,9 @@ function myFunction(e) {
 	let w = document.getElementById("barra").offsetWidth;
     let x = (dura * (e.offsetX + 1)) / w;
     let coor = x;
-    // document.getElementById("barra_interno").style.width = parseInt(coor)+"px";
-    // document.getElementById("alertmouse").innerHTML = "width: " + 
-    // w + "px; max:" + dura + " time: " + coor + "Cursor: " + x;
-    //console.log(parseInt(x));
+    document.getElementById("barra_interno").style.width = parseInt(coor)+"px";
+    w + "px; max:" + dura + " time: " + coor + "Cursor: " + x;
+    console.log(parseInt(x));
     console.log(coor);
     videos[0].seekTo(coor);
     duracao(videos[0]);
