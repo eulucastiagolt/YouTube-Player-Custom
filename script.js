@@ -75,10 +75,20 @@ function carregarvideo(deonde, codevideo) {
 	let btnplay_pause = document.createElement("div"), btnpstyle,
 		barra = document.createElement("div"), bstyle,
 		progresso = document.createElement("div"), pstyle;
+	
 	bstyle = "width: 100%; height: 10px; background:#333; position: absolute; bottom:0;";
 	barra.style = bstyle;
 	barra.id = "barra";
-	barra.setAttribute("onclick", "myFunction(event)");
+
+	barra.onclick = function(e){
+		let iddv = parseInt(document.getElementById(deonde).getAttribute("videoid")) + 1;
+		for(let i in videos){
+			if(videos[i].g == iddv){
+				myFunction(e, videos[i]);
+				console.log(videos[i]);
+			}
+		}
+	}
 
 	pstyle = "width: 0px; height: 10px; background:#f60; position: absolute; left: 0; right: 0;";
 
@@ -104,6 +114,7 @@ function carregarvideo(deonde, codevideo) {
 				if (videos[i].g == iddv) {
 					videos[i].playVideo();
 					duracao(videos[i]);
+					
 					btnplay_pause.innerHTML = '<span class="oi" data-glyph="media-pause"></span>';
 					btnplay_pause.querySelector("span").style = "display: inline-block; transform: translate(-50%, -50%); position: absolute; top: 50%; left: 50%;";
 					btnplay_pause.setAttribute("vdStatus", '1');
@@ -162,7 +173,7 @@ function duracao(v){
 }
 
 function formataTempo(v){
-	let coor = (document.getElementById("barra").offsetWidth * v.getCurrentTime())/v.getDuration();
+	let coor = (v.a.parentElement.lastChild.querySelector("#barra").offsetWidth * v.getCurrentTime())/v.getDuration();
 	if((v.getPlayerState() == 5) || (v.getPlayerState() == -1)) {
 		let total = moment.utc(v.getDuration() * 1000);
 		//$('#tempototal').text(total.format('mm:ss'));
@@ -179,15 +190,15 @@ function formataTempo(v){
 	v.a.parentElement.lastChild.querySelector("#barra_interno").style.width = Math.round(coor)+"px";
 }
 
-function myFunction(e) {
-	let dura = videos[0].getDuration();
-	let w = document.getElementById("barra").offsetWidth;
+function myFunction(e, v) {
+	let dura = v.getDuration();
+	let w = v.a.parentElement.lastChild.querySelector("#barra").offsetWidth;
     let x = (dura * (e.offsetX + 1)) / w;
     let coor = x;
-    document.getElementById("barra_interno").style.width = parseInt(coor)+"px";
+    v.a.parentElement.lastChild.querySelector("#barra").querySelector("#barra_interno").style.width = parseInt(coor)+"px";
     w + "px; max:" + dura + " time: " + coor + "Cursor: " + x;
-    console.log(parseInt(x));
-    console.log(coor);
-    videos[0].seekTo(coor);
-    duracao(videos[0]);
+    //console.log(parseInt(x));
+    //console.log(coor);
+    v.seekTo(coor);
+    duracao(v);
 }
