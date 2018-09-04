@@ -9,14 +9,6 @@ addicon.type = "text/css";
 addicon.href = "//cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic.min.css";
 document.head.appendChild(addicon);
 
-// let barradeprogress = document.createElement('style');
-// barradeprogress.rel = "stylesheet";
-// barradeprogress.type = "text/css";
-// barradeprogress.innerText += "#progresso::-moz-progress-bar { background: #ff6600; }";
-// barradeprogress.innerText += "#progresso::-webkit-progress-bar { background: #111; }";
-// barradeprogress.innerText += "#progresso::-webkit-progress-value { background: #ff6600; }";
-// document.head.appendChild(barradeprogress);
-
 let pp,
 	sp = "0",
 	video,
@@ -64,7 +56,6 @@ function carregarvideo(deonde, codevideo) {
 		});
 	}
 	videos.push(video);
-	//console.log(video);
 	idv++;
 
 	let playermodall = "display: inline-block;";
@@ -182,12 +173,9 @@ function formataTempo(v){
 		//$('#tempototal').text(total.format('mm:ss'));
 	}
 	let max = v.getDuration(), value = v.getCurrentTime()
-	//v.a.parentElement.lastChild.querySelector("progress").setAttribute("max", v.getDuration());
-	//v.a.parentElement.lastChild.querySelector("progress").setAttribute("value", v.getCurrentTime());
+
 	tt.innerText = v.getDuration();
-	document.getElementById("barra_interno").style.width = Math.round(coor)+"px";
-	//console.log(coor);
-	//console.log(v.a.parentElement.lastChild);
+	v.a.parentElement.lastChild.querySelector("#barra_interno").style.width = Math.round(coor)+"px";
 }
 
 function myFunction(e) {
